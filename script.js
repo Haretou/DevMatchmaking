@@ -78,7 +78,7 @@ function checkWin(row, col, player) {
         let winningPositions = [];
         let count = 0;
 
-        // Vérifier dans les deux sens de la direction
+        // Vérifier dans les deux sens 
         for (let i = -3; i <= 3; i++) {
             const r = row + i * dx;
             const c = col + i * dy;
