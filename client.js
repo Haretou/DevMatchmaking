@@ -1,6 +1,4 @@
-// Configuration - MODIFIEZ CES LIGNES POUR CONNECTER À VOTRE SERVEUR
-// Remplacez <IP-DU-SERVEUR> par l'adresse IP locale du serveur
-// Par exemple: "http://192.168.1.100:3000/api"
+
 const SERVER_IP = window.location.hostname; // Utilise automatiquement l'IP ou le domaine actuel
 const PORT = "3000";
 const API_URL = `http://${SERVER_IP}:${PORT}/api`;
