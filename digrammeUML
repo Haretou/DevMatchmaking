@@ -1,0 +1,104 @@
+classDiagram
+    class Player {
+        +UUID id
+        +String pseudo
+        +DateTime createdAt
+        +DateTime updatedAt
+        +getStats() Stats
+        +getMatchHistory() Match[]
+    }
+    
+    class Match {
+        +UUID id
+        +Player player1
+        +Player player2
+        +Board board
+        +String currentTurn
+        +Boolean isFinished
+        +Player winner
+        +DateTime createdAt
+        +DateTime updatedAt
+        +playTurn(player, column) Boolean
+        +checkWin(row, col, player) Boolean
+        +isBoardFull() Boolean
+        +endMatch(winner) void
+    }
+    
+    class Turn {
+        +Integer id
+        +Match match
+        +Player player
+        +Integer column
+        +Integer row
+        +DateTime createdAt
+    }
+    
+    class Board {
+        +Array~Array~String~~ grid
+        +createEmptyBoard() void
+        +findAvailableRow(column) Integer
+        +placeToken(row, column, color) void
+        +checkWin(row, column, color) Boolean
+        +isFull() Boolean
+    }
+    
+    class WaitingQueue {
+        +Array~WaitingPlayer~ queue
+        +addPlayer(player) void
+        +removePlayer(playerId) Boolean
+        +checkForMatches() void
+        +createMatch(player1, player2) Match
+    }
+    
+    class WaitingPlayer {
+        +UUID id
+        +String socketId
+        +String pseudo
+        +DateTime joinTime
+    }
+    
+    class MatchmakingServer {
+        +WaitingQueue waitingQueue
+        +Map~UUID, Match~ activeMatches
+        +initializeSockets() void
+        +handleConnection(socket) void
+        +handleDisconnection(socket) void
+        +joinQueue(player) void
+        +leaveQueue(playerId) void
+        +playTurn(matchId, playerId, column) void
+        +endMatch(matchId, winnerId) void
+    }
+    
+    class MatchmakingClient {
+        +String pseudo
+        +String color
+        +Boolean isMyTurn
+        +Match currentMatch
+        +Socket socket
+        +initializeSocket() void
+        +joinQueue(pseudo) void
+        +leaveQueue() void
+        +playTurn(column) void
+        +leaveMatch() void
+        +handleMatchStart(data) void
+        +handleTurnPlayed(data) void
+        +handleMatchEnd(data) void
+    }
+    
+    class Stats {
+        +Integer totalMatches
+        +Integer wins
+        +Integer losses
+        +Integer draws
+        +Double winRate
+    }
+    
+    Player "1" -- "n" Match: joue
+    Match "1" -- "1" Board: contient
+    Match "1" -- "n" Turn: enregistre
+    Turn "*" -- "1" Player: effectué par
+    WaitingQueue "1" -- "n" WaitingPlayer: contient
+    MatchmakingServer "1" -- "1" WaitingQueue: gère
+    MatchmakingServer "1" -- "n" Match: gère
+    Player "1" -- "1" Stats: possède
+    WaitingPlayer --|> Player: est un

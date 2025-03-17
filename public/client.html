@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Puissance 4 - Client Matchmaking</title>
+    <link rel="stylesheet" href="client.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Navigation principale -->
+        <nav>
+            <div class="logo">Puissance 4</div>
+            <div class="nav-links">
+                <button id="profileButton">Profil</button>
+                <button id="leaderboardButton">Classement</button>
+            </div>
+        </nav>
+
+        <!-- Écran d'accueil avec connexion -->
+        <div id="loginScreen" class="screen active">
+            <div class="login-container">
+                <h1>Bienvenue sur Puissance 4</h1>
+                <div class="form-group">
+                    <label for="pseudoInput">Choisissez un pseudo :</label>
+                    <input type="text" id="pseudoInput" maxlength="20" placeholder="Votre pseudo">
+                    <button id="startButton" class="primary-button">Jouer</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Écran de file d'attente -->
+        <div id="queueScreen" class="screen">
+            <div class="queue-container">
+                <h2>En attente d'un adversaire...</h2>
+                <div class="loader"></div>
+                <p id="queuePosition">Position: #<span id="positionNumber">1</span></p>
+                <p id="queueTime">Temps d'attente: <span id="waitTime">0</span>s</p>
+                <button id="cancelQueueButton" class="secondary-button">Annuler</button>
+            </div>
+        </div>
+
+        <!-- Écran de jeu -->
+        <div id="gameScreen" class="screen">
+            <div class="game-info">
+                <div class="player player-1">
+                    <div class="player-token"></div>
+                    <span id="player1Name">Joueur Rouge</span>
+                </div>
+                <div id="turnIndicator">Tour du Joueur Rouge</div>
+                <div class="player player-2">
+                    <div class="player-token"></div>
+                    <span id="player2Name">Joueur Jaune</span>
+                </div>
+            </div>
+
+            <div id="board" class="grid"></div>
+
+            <div id="gameControls">
+                <button id="surrenderButton" class="secondary-button">Abandonner</button>
+            </div>
+        </div>
+
+        <!-- Écran de fin de partie -->
+        <div id="gameOverScreen" class="screen">
+            <div class="gameover-container">
+                <h2 id="gameOverTitle">Partie terminée</h2>
+                <p id="gameOverMessage"></p>
+                <div class="button-group">
+                    <button id="playAgainButton" class="primary-button">Rejouer</button>
+                    <button id="returnToMenuButton" class="secondary-button">Menu principal</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Écran de profil joueur -->
+        <div id="profileScreen" class="screen">
+            <div class="profile-container">
+                <h2>Profil de <span id="profileName">Joueur</span></h2>
+
+                <div class="stats-container">
+                    <div class="stat-card">
+                        <div class="stat-value" id="totalMatchesValue">0</div>
+                        <div class="stat-label">Parties jouées</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="winsValue">0</div>
+                        <div class="stat-label">Victoires</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="lossesValue">0</div>
+                        <div class="stat-label">Défaites</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="drawsValue">0</div>
+                        <div class="stat-label">Nuls</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="winRateValue">0%</div>
+                        <div class="stat-label">Taux de victoire</div>
+                    </div>
+                </div>
+
+                <h3>Historique des parties</h3>
+                <div class="history-container">
+                    <table id="matchHistory">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Adversaire</th>
+                                <th>Résultat</th>
+                            </tr>
+                        </thead>
+                        <tbody id="historyTableBody">
+                            <!-- Les données seront ajoutées dynamiquement -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <button id="backFromProfileButton" class="secondary-button">Retour</button>
+            </div>
+        </div>
+
+        <!-- Écran de classement -->
+        <div id="leaderboardScreen" class="screen">
+            <div class="leaderboard-container">
+                <h2>Classement des joueurs</h2>
+
+                <table id="leaderboardTable">
+                    <thead>
+                        <tr>
+                            <th>Rang</th>
+                            <th>Joueur</th>
+                            <th>Parties</th>
+                            <th>Victoires</th>
+                            <th>Ratio</th>
+                        </tr>
+                    </thead>
+                    <tbody id="leaderboardTableBody">
+                        <!-- Les données seront ajoutées dynamiquement -->
+                    </tbody>
+                </table>
+
+                <button id="backFromLeaderboardButton" class="secondary-button">Retour</button>
+            </div>
+        </div>
+
+        <!-- Notifications -->
+        <div id="notificationContainer" class="hidden">
+            <div id="notificationMessage"></div>
+        </div>
+    </div>
+
+    <script src="https://cdn.socket.io/4.6.0/socket.io.min.js"></script>
+    <script src="client.js"></script>
+</body>
+
+</html>

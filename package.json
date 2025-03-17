@@ -1,0 +1,22 @@
+{
+    "name": "puissance4-matchmaking",
+    "version": "1.0.0",
+    "description": "Système de matchmaking pour le jeu Puissance 4",
+    "main": "server.js",
+    "scripts": {
+        "start": "node server.js",
+        "dev": "nodemon server.js"
+    },
+    "author": "Ynov B2",
+    "license": "ISC",
+    "dependencies": {
+        "cors": "^2.8.5",
+        "express": "^4.18.2",
+        "pg": "^8.11.3",
+        "socket.io": "^4.7.2",
+        "uuid": "^9.0.1"
+    },
+    "devDependencies": {
+        "nodemon": "^3.0.1"
+    }
+}
