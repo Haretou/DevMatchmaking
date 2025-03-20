@@ -1,6 +1,6 @@
 # Puissance 4 avec Matchmaking
 
-Ce projet implémente un système de matchmaking pour le jeu Puissance 4, permettant aux joueurs de s'affronter en ligne. Le système comprend un serveur de matchmaking, un client web et une base de données pour suivre les statistiques des joueurs.
+Ce projet implémente un système de matchmaking pour le jeu Puissance 4, permettant aux joueurs de s'affronter en local. Le système comprend un serveur de matchmaking, un client web et une base de données pour suivre les statistiques des joueurs.
 
 ## Fonctionnalités
 
