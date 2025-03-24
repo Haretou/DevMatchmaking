@@ -118,31 +118,3 @@ Sur chaque ordinateur client:
 1. Vérifiez que PostgreSQL est en cours d'exécution
 2. Vérifiez les identifiants dans le fichier `server.js`
 3. Assurez-vous que la base de données `puissance4_db` existe
-
-### Le serveur ne démarre pas
-
-1. Vérifiez que vous avez installé toutes les dépendances avec `npm install`
-2. Vérifiez les logs d'erreur dans la console
-3. Assurez-vous que le port 3000 n'est pas déjà utilisé par une autre application
-
-## Configuration avancée
-
-### Changer le port du serveur
-
-Si vous souhaitez utiliser un port différent de 3000, modifiez la variable `PORT` dans `server.js` et dans `client.js`:
-
-```javascript
-// Dans server.js
-const PORT = process.env.PORT || 5000;
-
-// Dans client.js
-const PORT = "5000";
-```
-
-### Déploiement sur Internet
-
-Pour rendre le jeu accessible depuis Internet:
-
-1. Déployez le serveur sur un service d'hébergement (Heroku, DigitalOcean, AWS, etc.)
-2. Configurez les règles de pare-feu pour autoriser les connexions au port utilisé
-3. Utilisez le nom de domaine ou l'adresse IP publique dans la configuration client
